@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Raksha Bandhan!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #e83e8c;
+            --secondary: #6f42c1;
+            --light: #f8f9fa;
+            --dark: #343a40;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #fff5f5, #f8f0ff);
+            margin: 0;
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+        }
+        
+        /* Floating decorations */
+        .floating {
+            position: absolute;
+            animation: float 6s ease-in-out infinite;
+            z-index: -1;
+            opacity: 0.7;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+        
+        /* Header styles */
+        header {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        h1 {
+            font-family: 'Pacifico', cursive;
+            font-size: 3.5rem;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            margin-top: 0.5rem;
+        }
+        
+        /* Photo gallery */
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 2rem;
+        }
+        
+        .photo-card {
+            width: 280px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            background: white;
+            position: relative;
+        }
+        
+        .photo-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+        
+        .photo-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .photo-card:hover img {
+            transform: scale(1.05);
+        }
+        
+        .photo-card .caption {
+            padding: 1rem;
+            text-align: center;
+            background: white;
+        }
+        
+        .photo-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(232,62,140,0.1), rgba(111,66,193,0.1));
+            z-index: 1;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .photo-card:hover::after {
+            opacity: 1;
+        }
+        
+        /* Quote carousel */
+        .quote-section {
+            background: linear-gradient(45deg, #ffcce6, #d9b3ff);
+            padding: 3rem 1rem;
+            text-align: center;
+            margin: 2rem 0;
+        }
+        
+        .quote {
+            font-size: 1.8rem;
+            font-style: italic;
+            color: var(--dark);
+            max-width: 800px;
+            margin: 0 auto;
+            font-family: 'Pacifico', cursive;
+        }
+        
+        /* Message cards */
+        .message-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 2rem;
+        }
+        
+        .message-card {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .message-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+        
+        .message-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--primary), var(--secondary));
+        }
+        
+        /* Music player */
+        .music-player {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: white;
+            border-radius: 50px;
+            padding: 0.8rem 1.2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 100;
+        }
+        
+        .music-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* Section headers */
+        .section-header {
+            text-align: center;
+            margin: 2rem 0 1rem;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 0 1rem;
+        }
+        
+        .section-header::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            border-radius: 3px;
+        }
+        
+        /* Emotional Footer */
+        .emotional-footer {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 2rem;
+            border-top: 3px solid white;
+            animation: pulse 5s infinite;
+        }
+        
+        .emotional-footer p {
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+            font-size: 1.1rem;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 0.9; }
+            50% { opacity: 1; }
+            100% { opacity: 0.9; }
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .gallery {
+                grid-template-columns: 1fr;
+            }
+            
+            .quote {
+                font-size: 1.4rem;
+            }
+            
+            .photo-card {
+                width: 100%;
+                max-width: 350px;
+            }
+            
+            .emotional-footer p {
+                font-size: 1rem;
+                padding: 0 1rem;
+            }
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 1s ease-out forwards;
+        }
+        
+        /* Custom cursor */
+        body {
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="%23e83e8c" d="M12 2L10 8l2 2 2-2-2-6zM8 14l-6-2 4-4 2 2-4 4zm8 0l4-4-2-2 4 4-6 2z"/></svg>'), auto;
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating decorations -->
+    <img src="https://cdn-icons-png.flaticon.com/512/2583/2583344.png" class="floating" style="width: 60px; top: 10%; left: 5%; animation-delay: 0s;">
+    <img src="https://cdn-icons-png.flaticon.com/512/2583/2583344.png" class="floating" style="width: 40px; top: 20%; right: 10%; animation-delay: 1s;">
+    <img src="https://cdn-icons-png.flaticon.com/512/2583/2583344.png" class="floating" style="width: 50px; bottom: 15%; left: 15%; animation-delay: 2s;">
+    <img src="https://cdn-icons-png.flaticon.com/512/2583/2583344.png" class="floating" style="width: 30px; bottom: 25%; right: 20%; animation-delay: 3s;">
+
+    <!-- Header section -->
+    <header class="fade-in">
+        <h1>Happy Raksha Bandhan!</h1>
+        <p class="subtitle">A bond of love, protection, and endless memories</p>
+    </header>
+
+    <!-- Sister photos section -->
+    <section class="fade-in">
+        <h2 class="section-header" style="color: var(--primary);">My Wonderful Sister</h2>
+        <div class="gallery">
+            <!-- Sister Photo 1 -->
+            <div class="photo-card">
+                <img src="public/image/Img_1.jpg" alt="Sister Childhood">
+                <div class="caption">
+                    <h3>More Than a Sister, A Second Mother</h3>
+                    <p>A second mother, a protector, and my forever guiding light.</p>
+                </div>
+            </div>
+            
+            <!-- Sister Photo 2 -->
+            <div class="photo-card">
+                <img src="public/image/Img_2.jpg" alt="Sister Celebration">
+                <div class="caption">
+                    <h3>My First Friend, My Forever Protector</h3>
+                    <p>From childhood laughter to life's toughest storms, you've stood by me as my first friend and forever protector.</p>
+                </div>
+            </div>
+            
+            <!-- Sister Photo 3 -->
+            <div class="photo-card">
+                <img src="public/image/Img_3.jpg" alt="Sister Together">
+                <div class="caption">
+                    <h3>The Smile That Lights Up My World</h3>
+                    <p>Your smile has always been my source of happiness and comfort.</p>
+                </div>
+            </div>
+            
+            <!-- Sister Photo 4 -->
+            <div class="photo-card">
+                <img src="public/image/Img_4.jpg" alt="Sister Adventure">
+                <div class="caption">
+                    <h3>Together Forever</h3>
+                    <p>No matter where life takes us, we'll always be together in heart.</p>
+                </div>
+            </div>
+            
+            <!-- Sister Photo 5 -->
+            <div class="photo-card">
+                <img src="public/image/Img_5.jpg" alt="Sister Love">
+                <div class="caption">
+                    <h3>Little Sister, Lifelong Happiness</h3>
+                    <p>Your laughter, love, and presence bring lifelong happiness to my heart, little sister.</p>
+                </div>
+            </div>
+
+            <!-- Sister Photo 6 -->
+             <div class="photo-card">
+                <img src="public/image/Img_6.png" alt="Sister Adventure">
+                <div class="caption">
+                    <h3>Little Sister</h3>
+                    <p>You may be little, but you hold the biggest place in my heart.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Brother photos section -->
+    <section class="fade-in">
+        <h2 class="section-header" style="color: var(--secondary);">My Amazing Brother</h2>
+        <div class="gallery">
+            <!-- Brother Photo 1 -->
+            <div class="photo-card">
+                <img src="public/image/Bhaiya.JPG" alt="Brother Support">
+                <div class="caption">
+                    <h3>My Protector</h3>
+                    <p>Always there when I need you</p>
+                </div>
+            </div>
+            
+            <!-- Brother Photo 2 -->
+            <div class="photo-card">
+                <img src="public/image/MySelf.jpg" alt="Brother Bond">
+                <div class="caption">
+                    <h3>Unbreakable Bond</h3>
+                    <p>Through thick and thin</p>
+                </div>
+            </div>
+            
+            <!-- Brother Photo 3 -->
+            <div class="photo-card">
+                <img src="public/image/Chotu.jpg" alt="Young brother smiling and making a playful gesture in a festive home setting with a joyful and lighthearted atmosphere">
+                <div class="caption">
+                    <h3>Funny Brother</h3>
+                    <p>Laughter that never ends</p>
+                </div>
+            </div>
+            
+            <!-- Brother Photo 4 -->
+            <div class="photo-card">
+                <img src="public/image/Little.jpg" alt="Brother Childhood">
+                <div class="caption">
+                    <h3>Little Heroes</h3>
+                    <p>Our childhood adventures</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quote carousel -->
+    <section class="quote-section fade-in">
+        <div class="quote" id="typing-quote"></div>
+    </section>
+
+    <!-- Message cards section -->
+    <section class="fade-in">
+        <h2 class="section-header" style="color: var(--primary);">Special Memories</h2>
+        <div class="message-grid">
+            <div class="message-card" onclick="showMessage(1)">
+                <h3>Our Childhood</h3>
+                <p>Click to reveal memory...</p>
+            </div>
+            <div class="message-card" onclick="showMessage(2)">
+                <h3>Funny Moment</h3>
+                <p>Click to reveal memory...</p>
+            </div>
+            <div class="message-card" onclick="showMessage(3)">
+                <h3>Heartfelt Thanks</h3>
+                <p>Click to reveal memory...</p>
+            </div>
+            <div class="message-card" onclick="showMessage(5)">
+                <h3>Life Lessons</h3>
+                <p>Click to reveal memory...</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Music player with "Tum Se Hi" song -->
+    <div class="music-player">
+        <button class="music-btn" id="musicToggle">♪</button>
+        <span>Tum Se Hi Song</span>
+        <audio id="bgMusic" loop>
+            <source src="public/audio/song_rakhi.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+    </div>
+
+    <!-- Emotional Footer -->
+    <footer class="emotional-footer fade-in">
+        <div class="footer-content">
+            <h3 style="font-family: 'Pacifico', cursive; font-size: 1.8rem; margin-bottom: 1rem;">To My Dearest Sister</h3>
+            <p>
+                "Tumse hi khilte saare phool, tumse hi haste saare mann...<br>
+                Tumse hi ban jaati hain sabko himmat, jab tu haath thaam le..."<br><br>
+                
+                This Rakhi, though miles apart, my heart celebrates our bond that distance can't weaken.<br>
+                Your love has been my strength, your care my protection.<br>
+                I miss our laughter, our fights, and even your scoldings!<br><br>
+                
+                <span style="font-style: italic; font-weight: bold; text-decoration: underline;">Miss you every day, but today especially...</span><br>
+                No matter where life takes us, you'll always be my first friend and forever sister.
+            </p>
+            <div style="margin-top: 1.5rem; font-size: 1.3rem; font-family: 'Pacifico', cursive;">
+                ❤ Happy Raksha Bandhan! ❤
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Typing quote animation
+        const quotes = [
+            "A sibling is both your mirror and your opposite.",
+            "Brothers and sisters are as close as hands and feet.",
+            "The greatest gift our parents ever gave us was each other.",
+            "Siblings: the people we practice on, the people who teach us about fairness and cooperation.",
+            "Raksha Bandhan celebrates the pure bond of love between siblings."
+        ];
+        
+        let currentQuote = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        let typingSpeed = 100;
+        
+        function typeQuote() {
+            const quoteElement = document.getElementById('typing-quote');
+            const fullQuote = quotes[currentQuote];
+            
+            if (isDeleting) {
+                quoteElement.textContent = fullQuote.substring(0, charIndex - 1);
+                charIndex--;
+                typingSpeed = 50;
+            } else {
+                quoteElement.textContent = fullQuote.substring(0, charIndex + 1);
+                charIndex++;
+                typingSpeed = 100;
+            }
+            
+            if (!isDeleting && charIndex === fullQuote.length) {
+                isDeleting = true;
+                typingSpeed = 1500; // Pause at end
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                currentQuote = (currentQuote + 1) % quotes.length;
+                typingSpeed = 500; // Pause before next quote
+            }
+            
+            setTimeout(typeQuote, typingSpeed);
+        }
+        
+        // Start typing animation
+        setTimeout(typeQuote, 1500);
+        
+        // Message cards
+        const messages = [
+            "Remember when we used to build pillow forts and pretend we were kings and queens? Those were the best days!",
+            "That time you covered for me when I broke mom's favorite vase... I still owe you for that one!",
+            "Thank you for always being my rock. No matter what happens, I know I can count on you.",
+            "You've seen me at my worst and still love me anyway. That's what makes you the best sibling.",
+            "Remember our summer vacations at grandma's house? Those were the happiest times of my childhood!",
+            "I'll never forget how you stood up for me when I was being bullied in school. My real-life superhero!",
+            "All those times we fought over the TV remote... now I'd give anything to have those moments back!",
+            "You taught me how to ride a bike, do my homework, and face my fears. My first and best teacher!",
+            "No matter how far apart we are, you're always in my heart. Distance can't break our bond!"
+        ];
+        
+        function showMessage(index) {
+            const card = event.currentTarget;
+            card.innerHTML = `<h3>Memory #${index}</h3><p>${messages[index - 1]}</p>`;
+            
+            // Add confetti effect
+            for (let i = 0; i < 20; i++) {
+                const heart = document.createElement('div');
+                heart.innerHTML = '❤';
+                heart.style.position = 'absolute';
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.top = Math.random() * 100 + '%';
+                heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
+                heart.style.animation = `fall ${Math.random() * 3 + 2}s linear forwards`;
+                card.appendChild(heart);
+            }
+            
+            // Remove hearts after animation
+            setTimeout(() => {
+                const hearts = card.querySelectorAll('div');
+                hearts.forEach(heart => heart.remove());
+            }, 3000);
+        }
+        
+        // Add falling animation for hearts
+        const style = document.createElement('style');
+        style.innerHTML = `
+            @keyframes fall {
+                to {
+                    transform: translateY(100px) rotate(360deg);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // Music player
+        const musicToggle = document.getElementById('musicToggle');
+        const bgMusic = document.getElementById('bgMusic');
+        
+        musicToggle.addEventListener('click', function() {
+            if (bgMusic.paused) {
+                bgMusic.play();
+                this.textContent = '❚❚';
+            } else {
+                bgMusic.pause();
+                this.textContent = '♪';
+            }
+        });
+        
+        // Fade-in animation for sections
+        const fadeElements = document.querySelectorAll('.fade-in');
+        
+        function checkFade() {
+            fadeElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (elementTop < windowHeight - 100) {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        }
+        
+        window.addEventListener('scroll', checkFade);
+        window.addEventListener('load', checkFade);
+    </script>
+</body>
+</html>
